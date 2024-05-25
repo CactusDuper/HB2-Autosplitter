@@ -12,7 +12,7 @@ state("Hellblade2-Win64-Shipping", "1.0.0.0 Steam")
 	
 }
 
-state("Hellblade2-Win64-Shipping", "1.0.0.0 Xbox")
+state("Hellblade2-WinGDK-Shipping", "1.0.0.0 Xbox")
 {
 
 }
