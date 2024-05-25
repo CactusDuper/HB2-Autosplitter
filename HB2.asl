@@ -7,6 +7,15 @@ https://www.speedrun.com/Hellblade2
 Last updated: 24 May 2024
 */
 
+state("Hellblade2-Win64-Shipping", "1.0.0.0 Steam")
+{
+	
+}
+
+state("Hellblade2-Win64-Shipping", "1.0.0.0 Xbox")
+{
+
+}
 
 
 startup
