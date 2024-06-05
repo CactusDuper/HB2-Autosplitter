@@ -5,7 +5,7 @@ Thank you for your help Salad :)
 
 https://www.speedrun.com/Hellblade2
 
-Last updated: 26 May 2024
+Last updated: 5 June 2024
 */
 
 state("Hellblade2-Win64-Shipping", "Steam"){}
@@ -16,8 +16,6 @@ state("Hellblade2-WinGDK-Shipping", "Xbox"){}
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Basic");
-
-	settings.Add("test_cine", false, "Alternative cinematic LRT");
 
 	settings.Add("ch1", true, "First Chapter");
 	settings.Add("0_1_8", false, "Landfall", "ch1");
@@ -76,9 +74,7 @@ init
 	vars.Helper["isMenuMusic"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x43E);
 	vars.Helper["activeChapterIndex"] = vars.Helper.Make<int>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x574);
 	vars.Helper["IsSkipCinematicsAvailable"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x444);
-	
-	vars.Helper["isInCinematicMode"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0x38, 0x0, 0x30, 0x328, 0xFE8);
-	
+		
 	vars.completedSplits = new HashSet<string>();
 }
 
@@ -112,9 +108,6 @@ split
 
 isLoading
 {
-    if (settings["test_cine"] && current.isInCinematicMode)
-        return true;
-
 	return (current.isLoading || current.isPaused || current.isMenuMusic || current.IsSkipCinematicsAvailable);
 }
 
