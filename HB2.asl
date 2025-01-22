@@ -64,16 +64,31 @@ startup
 
 init
 {
-	IntPtr gameEngine = vars.Helper.ScanRel(3, "48 8B 05 ?? ?? ?? ?? 48 8B 88 ?? ?? 00 00 48 85 C9 74 ?? 48 8B 49 ?? 48 85 C9");
+	IntPtr gameEngine = vars.Helper.ScanRel(3, "48 8B 0D ???????? 66 0F 5A C9 E8");
 
-	vars.Helper["chapterIndex"] = vars.Helper.Make<int>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x410);
-	vars.Helper["checkpointIndex"] = vars.Helper.Make<int>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x414);
-	vars.Helper["devCheckpointIndex"] = vars.Helper.Make<int>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x418);
-	vars.Helper["isLoading"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x432);
-	vars.Helper["isPaused"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x439);
-	vars.Helper["isMenuMusic"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x43E);
-	vars.Helper["activeChapterIndex"] = vars.Helper.Make<int>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x574);
-	vars.Helper["IsSkipCinematicsAvailable"] = vars.Helper.Make<bool>(gameEngine, 0x10B8, 0xC0, 0x60, 0x20, 0x20, 0x444);
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->Focused_ChapterIndex
+	vars.Helper["chapterIndex"] = vars.Helper.Make<int>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x418);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->Focused_CheckpointIndex
+	vars.Helper["checkpointIndex"] = vars.Helper.Make<int>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x41C);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->Focused_DevCheckpointIndex
+	vars.Helper["devCheckpointIndex"] = vars.Helper.Make<int>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x420);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->bIsLoading
+	vars.Helper["isLoading"] = vars.Helper.Make<bool>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x43A);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->bIsGamePaused
+	vars.Helper["isPaused"] = vars.Helper.Make<bool>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x441);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->bMenuMusic
+	vars.Helper["isMenuMusic"] = vars.Helper.Make<bool>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x446);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->ActiveChapterIndex
+	vars.Helper["activeChapterIndex"] = vars.Helper.Make<int>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x57C);
+
+	// GEngine->GameInstance->Unk_FByteProperty->PostConstructLinkNext->Outer->Outer->IsSkipCinematicsAvailable
+	vars.Helper["IsSkipCinematicsAvailable"] = vars.Helper.Make<bool>(gameEngine, 0x10D0, 0xC0, 0x60, 0x20, 0x20, 0x44C);
 		
 	vars.completedSplits = new HashSet<string>();
 }
